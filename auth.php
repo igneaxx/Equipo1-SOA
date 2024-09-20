@@ -9,41 +9,52 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Verificar conexión
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    die("Error de conexión: " . $conn->connect_error);
 }
 
 // Registro de usuario
-if ($_POST['action'] == 'register') {
-    $user = $_POST['username'];
+if (isset($_POST['action']) && $_POST['action'] == 'register') {
+    $user = $conn->real_escape_string($_POST['username']);
     $pass = password_hash($_POST['password'], PASSWORD_BCRYPT);
-    $email = $_POST['email'];
-    $sql = "INSERT INTO Users (username, password, email) VALUES ('$user', '$pass', '$email')";
-    if ($conn->query($sql) === TRUE) {
-        // Registro exitoso, redirige a la página de bienvenida o confirmación
+    $email = $conn->real_escape_string($_POST['email']);
+    
+    $stmt = $conn->prepare("INSERT INTO Users (username, password, email) VALUES (?, ?, ?)");
+    $stmt->bind_param("sss", $user, $pass, $email);
+    
+    if ($stmt->execute()) {
+        // Registro exitoso
         header("Location: login.html");
         exit(); 
     } else {
-        echo "Error: " . $conn->error;
+        echo "Error: " . $stmt->error;
     }
+    $stmt->close();
 }
 
-
 // Inicio de sesión
-if ($_POST['action'] == 'login') {
-    $user = $_POST['username'];
+if (isset($_POST['action']) && $_POST['action'] == 'login') {
+    $user = $conn->real_escape_string($_POST['username']);
     $pass = $_POST['password'];
-    $sql = "SELECT password FROM Users WHERE username='$user'";
-    $result = $conn->query($sql);
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        if (password_verify($pass, $row['password'])) {
+    
+    $stmt = $conn->prepare("SELECT password FROM Users WHERE username=?");
+    $stmt->bind_param("s", $user);
+    $stmt->execute();
+    $stmt->store_result();
+    
+    if ($stmt->num_rows > 0) {
+        $stmt->bind_result($hashedPassword);
+        $stmt->fetch();
+        
+        if (password_verify($pass, $hashedPassword)) {
             header("Location: reservations.php");
+            exit();
         } else {
-            echo "Invalid credentials";
+            echo "Credenciales inválidas";
         }
     } else {
-        echo "No such user";
+        echo "No existe este usuario";
     }
+    $stmt->close();
 }
 
 $conn->close();
