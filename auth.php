@@ -1,5 +1,5 @@
 <?php
-$servername = "localhost";
+$servername = "34.82.62.197";
 $username = "root";
 $password = "";
 $dbname = "flight_reservation";
