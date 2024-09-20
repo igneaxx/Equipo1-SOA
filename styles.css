@@ -84,3 +84,18 @@ input[type="submit"]:hover {
     background: url('/imagenes/reservation.jpg') no-repeat center center fixed;
     background-size: cover;
 }
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50; /* Color de fondo */
+    color: white; /* Color del texto */
+    text-align: center;
+    text-decoration: none; /* Sin subrayado */
+    border-radius: 5px; /* Bordes redondeados */
+    margin-top: 20px; /* Espacio superior */
+}
+
+.button:hover {
+    background-color: #45a049; /* Color de fondo al pasar el mouse */
+}

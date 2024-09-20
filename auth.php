@@ -19,11 +19,14 @@ if ($_POST['action'] == 'register') {
     $email = $_POST['email'];
     $sql = "INSERT INTO Users (username, password, email) VALUES ('$user', '$pass', '$email')";
     if ($conn->query($sql) === TRUE) {
-        echo "Registration successful";
+        // Registro exitoso, redirige a la página de bienvenida o confirmación
+        header("Location: login.html");
+        exit(); 
     } else {
         echo "Error: " . $conn->error;
     }
 }
+
 
 // Inicio de sesión
 if ($_POST['action'] == 'login') {
@@ -34,7 +37,7 @@ if ($_POST['action'] == 'login') {
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         if (password_verify($pass, $row['password'])) {
-            echo "Login successful";
+            header("Location: my_reservations.php");
         } else {
             echo "Invalid credentials";
         }
