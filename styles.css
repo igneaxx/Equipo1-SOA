@@ -6,29 +6,47 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
+    position: relative; /* Permite posicionar elementos hijos */
     background: url('imagenes/fondo.jpg') no-repeat center center fixed;
     background-size: cover;
 }
+
 .container {
-    background: rgba(255, 255, 255, 0.9); /* Fondo blanco con opacidad para ver la imagen de fondo */
+    position: relative; /* Permite que el pseudo-elemento se posicione en relación a este contenedor */
+    background: rgba(255, 255, 255, 0.9); /* Fondo blanco con opacidad */
     padding: 2rem;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 20px 25px 20px rgba(0, 0, 0, 0.721);
     width: 300px;
     max-width: 100%;
+    z-index: 2; /* Asegura que esté por encima de la capa de opacidad */
 }
+
+.opacity {
+    position: absolute; /* Posiciona el fondo de opacidad */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Opacidad del fondo */
+    z-index: 1; /* Coloca la opacidad por debajo del contenedor */
+}
+
 h1 {
     text-align: center;
     margin-bottom: 1rem;
 }
+
 .form-group {
     margin-bottom: 1rem;
 }
+
 label {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: bold;
 }
+
 input[type="text"],
 input[type="password"] {
     width: 100%;
@@ -36,6 +54,7 @@ input[type="password"] {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+
 input[type="submit"] {
     width: 100%;
     padding: 0.75rem;
@@ -45,8 +64,23 @@ input[type="submit"] {
     color: #fff;
     font-size: 1rem;
     cursor: pointer;
-}
-input[type="submit"]:hover {
-    background-color: #0056b3;
+    transition: background-color 1s ease, color 1s ease, border 1s ease-out;
 }
 
+input[type="submit"]:hover {
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    border: 1px solid rgb(0, 0, 0);
+}
+
+/* Estilo Para pagina Search.HTML */
+.search { 
+    background: url('/imagenes/flymaps2.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+/* Estilo Para pagina reservation.HTML */
+.reserv {
+    background: url('/imagenes/reservation.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
