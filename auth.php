@@ -37,7 +37,7 @@ if ($_POST['action'] == 'login') {
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         if (password_verify($pass, $row['password'])) {
-            header("Location: my_reservations.php");
+            header("Location: reservations.php");
         } else {
             echo "Invalid credentials";
         }
