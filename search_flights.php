@@ -36,6 +36,7 @@ $conn->close();
     <title>Resultados de Vuelos</title>
     <link rel="stylesheet" href="search.css">
     <link rel="icon" href="imagenes/airplane.png">
+    <link rel="stylesheet" href="scripts.js">
 </head>
 <body>
     <div class="busca">
@@ -62,8 +63,7 @@ $conn->close();
                     <td><?php echo $flight['price']; ?></td>
                     <td>
                         <form action="reserve_flight.php" method="POST">
-                            <input type="hidden" name="flight_id" value="<?php echo $flight['flight_id']; ?>">
-                            <input type="submit" value="Reservar">
+                        <input type="button" value="Reservar" onclick="openModal(<?php echo $flight['flight_id']; ?>)">
                         </form>
                     </td>
                 </tr>
@@ -75,5 +75,23 @@ $conn->close();
 
     <a href="search.html">Buscar Nuevos Vuelos</a>
     </div>
+
+    <!-- Ventana emergente para inicio de sesión -->
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Iniciar Sesión</h2>
+        <form id="loginForm" action="reserve_flight.php" method="POST">
+            <input type="hidden" name="flight_id" id="modalFlightId">
+            <label for="username">Usuario:</label>
+            <input type="text" name="username" required>
+            <label for="password">Contraseña:</label>
+            <input type="password" name="password" required>
+            <input type="submit" value="Reservar">
+        </form>
+    </div>
+</div>
+
+
 </body>
 </html>

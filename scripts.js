@@ -35,3 +35,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+function openModal(flightId) {
+    document.getElementById("modalFlightId").value = flightId;
+    document.getElementById("loginModal").style.display = "block";
+}
+
+function closeModal() {
+    document.getElementById("loginModal").style.display = "none";
+}
+
+// Cerrar la ventana emergente si el usuario hace clic fuera de ella
+window.onclick = function(event) {
+    const modal = document.getElementById("loginModal");
+    if (event.target == modal) {
+        closeModal();
+    }
+}
