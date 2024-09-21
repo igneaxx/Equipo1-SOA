@@ -100,35 +100,35 @@ input[type="submit"]:hover {
     background-color: #45a049; /* Color de fondo al pasar el mouse */
 }
 
-.container1 {
+.vuelos{
     position: relative; /* Permite que el pseudo-elemento se posicione en relación a este contenedor */
     background: rgba(255, 255, 255, 0.9); /* Fondo blanco con opacidad */
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 20px 25px 20px rgba(0, 0, 0, 0.721);
-    width: 70%;
+    width: 700px;
     max-width: 100%;
     z-index: 2; /* Asegura que esté por encima de la capa de opacidad */
 }
 
 
-table {
+.vuelo > table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
 }
 
-th, td {
+.vuelo > th, td {
     padding: 10px;
     text-align: left;
-    border: 1px solid #ddd;
+    border: 3px solid #000000;
 }
 
-th {
+.vuelo >  th {
     background-color: #007bff;
     color: white;
 }
 
-tr:hover {
+.vuelo >  tr:hover {
     background-color: #f1f1f1;
 }
