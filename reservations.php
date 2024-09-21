@@ -35,7 +35,7 @@ $conn->close();
 </head>
 <body>
 
-<div class="form-container" >
+<div class="container" >
     <h1>Mis Reservas</h1>
 
     <!-- Botón para crear una nueva reserva -->
