@@ -57,8 +57,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'login') {
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
             if (password_verify($pass, $row['password'])) {
-                session_start(); // Iniciar la sesión
-                $_SESSION['user_id'] = $row['user_id']; // Almacenar user_id en la sesión
+                $_SESSION['user_id'] = $row['user_id']; // Guardar user_id en la sesión
                 header("Location: reservations.php");
                 exit();
             } else {
