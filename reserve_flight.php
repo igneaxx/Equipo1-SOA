@@ -29,7 +29,7 @@ $stmt->bind_param("ii", $user_id, $flight_id);
 
 if ($stmt->execute()) {
     // Redirige a "Mis Reservas" después de la reserva
-    header("Location: my_reservations.php"); // Cambia esto por la URL de tu página de reservas
+    header("Location: reservations.php"); // Cambia esto por la URL de tu página de reservas
     exit();
 } else {
     echo "Error al guardar la reserva.";
