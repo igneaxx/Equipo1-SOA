@@ -38,4 +38,4 @@ if ($stmt->execute()) {
     header("Location: reservations.php");
     exit();
 } else {
-    echo "Error al guardar la reserva: " . $
+    echo "Error al guardar la reserva: " . $}
