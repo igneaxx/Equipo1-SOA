@@ -15,12 +15,6 @@ if ($conn->connect_error) {
     die("Error de conexión: " . $conn->connect_error);
 }
 
-// Asegúrate de que el usuario está autenticado
-if (!isset($_SESSION['user_id'])) {
-    header("Location: login.html"); // Redirige si no está autenticado
-    exit();
-}
-
 $user_id = $_SESSION['user_id']; // Obtén el user_id de la sesión
 $flight_id = $_POST['flight_id']; // Obtén el ID del vuelo del formulario
 
