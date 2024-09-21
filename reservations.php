@@ -37,7 +37,8 @@ $conn->close();
     <h1>Mis Reservas</h1>
 
     <!-- Botón para crear una nueva reserva -->
-    <a href="reserve_flight.php" class="button">Crear Nueva Reserva</a>
+<a href="search.html" class="button">Crear Nueva Reserva</a>
+
 
     <?php if ($result->num_rows > 0): ?>
         <table>

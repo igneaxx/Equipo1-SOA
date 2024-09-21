@@ -6,13 +6,12 @@
     <title>Inicio de sesión</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="imagenes/airplane.png">
-
 </head>
 <body>
     <div class="opacity"></div>
     <div class="container">
         <h1>Inicio de sesión</h1>
-        <form id="loginForm" action="auth.php">
+        <form id="loginForm" action="auth.php" method="POST">
             <div class="form-group">
                 <label for="username">Nombre de usuario:</label>
                 <input type="text" id="username" name="username" placeholder="Introduce tu nombre de usuario" required aria-label="Nombre de usuario">
@@ -21,6 +20,8 @@
                 <label for="password">Contraseña:</label>   
                 <input type="password" id="password" name="password" placeholder="Introduce tu contraseña" required aria-label="Contraseña">
             </div>
+            <!-- Campo oculto para definir la acción de login -->
+            <input type="hidden" name="action" value="login">
             <input type="submit" value="Iniciar Sesión">
         </form>
     </div>
