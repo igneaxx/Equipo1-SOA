@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "Aylin2024!";
 $dbname = "flight_reservation";
 
 // Crear conexión
@@ -9,24 +9,25 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Verificar conexión
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    die("Error de conexión: " . $conn->connect_error);
 }
 
-// Buscar vuelos
+// Obtener los valores del formulario de búsqueda
 $origin = $_POST['origin'];
 $destination = $_POST['destination'];
-$sql = "SELECT * FROM Flights WHERE origin='$origin' AND destination='$destination'";
-$result = $conn->query($sql);
-$flights = [];
 
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $flights[] = $row;
-    }
-}
+// Consulta SQL para obtener los vuelos disponibles
+$sql = "SELECT * FROM Flights WHERE origin=? AND destination=?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("ss", $origin, $destination);
+$stmt->execute();
+$result = $stmt->get_result();
+$flights = $result->fetch_all(MYSQLI_ASSOC);
 
-// Generar la respuesta HTML
+$stmt->close();
+$conn->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -59,7 +60,6 @@ if ($result->num_rows > 0) {
                     <td><?php echo $flight['price']; ?></td>
                     <td>
                         <form action="reserve_flight.php" method="POST">
-                            <input type="hidden" name="user_id" value="<?php echo $_GET['user_id']; ?>"> <!-- Suponiendo que envías el user_id -->
                             <input type="hidden" name="flight_id" value="<?php echo $flight['flight_id']; ?>">
                             <input type="submit" value="Reservar">
                         </form>
