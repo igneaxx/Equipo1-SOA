@@ -7,14 +7,10 @@ body {
     height: 100vh;
     margin: 0;
     position: relative; /* Permite posicionar elementos hijos */
-    background: url('/imagenes/search.jpg') no-repeat center center fixed;
+    background: url('imagenes/search.jpg') no-repeat center center fixed;
     background-size: cover;
 }
 
-.search { 
-    background: url('/imagenes/search.jpg') no-repeat center center fixed;
-    background-size: cover;
-}
 
 .busca {
     max-width: 800px;
