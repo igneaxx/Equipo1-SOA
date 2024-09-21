@@ -33,7 +33,7 @@ $conn->close();
     <title>Mis Reservas</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="reserv">
 
 <div class="container" >
     <h1>Mis Reservas</h1>
