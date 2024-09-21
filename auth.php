@@ -49,7 +49,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'login') {
     $pass = trim($_POST['password']);
 
     // Usar sentencia preparada para prevenir inyecciones SQL
-    $stmt = $conn->prepare("SELECT password FROM Users WHERE username=?");
+    $stmt = $conn->prepare("SELECT user_id, password FROM Users WHERE username=?"); // Asegúrate de seleccionar user_id
     $stmt->bind_param("s", $user);
     
     if ($stmt->execute()) {
@@ -57,7 +57,8 @@ if (isset($_POST['action']) && $_POST['action'] == 'login') {
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
             if (password_verify($pass, $row['password'])) {
-                $_SESSION['user_id'] = $row['user_id']; // Guardar user_id en la sesión
+                $_SESSION['user_id'] = $row['user_id']; // Almacena el user_id en la sesión
+                var_dump($_SESSION); // Verifica que user_id se haya almacenado
                 header("Location: reservations.php");
                 exit();
             } else {
@@ -70,6 +71,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'login') {
         echo "Error en la consulta.";
     }
 }
+
 
 $conn->close();
 ?>
