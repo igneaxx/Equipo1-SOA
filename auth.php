@@ -13,7 +13,7 @@ if ($conn->connect_error) {
 }
 
 // Registro de usuario
-if ($_POST['action'] == 'register') {
+if (isset($_POST['action']) && $_POST['action'] == 'register') {
     $user = trim($_POST['username']);
     $pass = password_hash(trim($_POST['password']), PASSWORD_BCRYPT);
     $email = trim($_POST['email']);
@@ -36,7 +36,7 @@ if ($_POST['action'] == 'register') {
 }
 
 // Inicio de sesión
-if ($_POST['action'] == 'login') {
+if (isset($_POST['action']) && $_POST['action'] == 'login') {
     $user = trim($_POST['username']);
     $pass = trim($_POST['password']);
 
