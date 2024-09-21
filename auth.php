@@ -38,5 +38,3 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 $stmt->close();
 $conn->close();
 ?>
-
-?>
