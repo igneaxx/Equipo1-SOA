@@ -101,14 +101,14 @@ input[type="submit"]:hover {
 }
 
 .container1 {
-    width: 80%;
-    max-width: 800px;
-    margin: auto;
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco con un poco de transparencia */
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    margin-top: 50px;
+    position: relative; /* Permite que el pseudo-elemento se posicione en relación a este contenedor */
+    background: rgba(255, 255, 255, 0.9); /* Fondo blanco con opacidad */
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 20px 25px 20px rgba(0, 0, 0, 0.721);
+    width: 70%;
+    max-width: 100%;
+    z-index: 2; /* Asegura que esté por encima de la capa de opacidad */
 }
 
 
