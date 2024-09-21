@@ -75,7 +75,7 @@ input[type="submit"]:hover {
 
 /* Estilo Para pagina Search.HTML */
 .search { 
-    background: url('https://thumbs.web.sapo.io/?W=800&H=0&delay_optim=1&epic=YjdmJ/XPr6v67j/itkc0TBvDi92qSz8XbST34MlwMPrHWRdPXduWAK7Ro0vZ9K4L74mABpdk3PuKkP2eL/YFaJcpI8tSGkGOaUYW+5Q3xN+EUy4=') no-repeat center center fixed;
+    background: url('https://c.pxhere.com/photos/98/e8/nasa_earth_map_night_sky_ocean_city_sea-1246180.jpg!d') no-repeat center center fixed;
     background-size: cover;
 }
 
@@ -131,4 +131,16 @@ th {
 
 tr:hover {
     background-color: #f1f1f1;
+}
+
+a {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
 }
