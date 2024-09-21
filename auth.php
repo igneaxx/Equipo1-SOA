@@ -59,7 +59,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'login') {
             if (password_verify($pass, $row['password'])) {
                 $_SESSION['user_id'] = $row['user_id']; // Almacena el user_id en la sesión
                 var_dump($_SESSION); // Verifica que user_id se haya almacenado
-                header("Location: reservations.php");
+                header("Location: search.html");
                 exit();
             } else {
                 echo "Invalid credentials";
