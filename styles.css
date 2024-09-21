@@ -99,3 +99,14 @@ input[type="submit"]:hover {
 .button:hover {
     background-color: #45a049; /* Color de fondo al pasar el mouse */
 }
+
+.container {
+    width: 80%;
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco con un poco de transparencia */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin-top: 50px;
+}
