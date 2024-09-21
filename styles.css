@@ -75,7 +75,7 @@ input[type="submit"]:hover {
 
 /* Estilo Para pagina Search.HTML */
 .search { 
-    background: url('https://c.pxhere.com/photos/98/e8/nasa_earth_map_night_sky_ocean_city_sea-1246180.jpg!d') no-repeat center center fixed;
+    background: url('/imagenes/search.jpg') no-repeat center center fixed;
     background-size: cover;
 }
 
@@ -100,47 +100,72 @@ input[type="submit"]:hover {
     background-color: #45a049; /* Color de fondo al pasar el mouse */
 }
 
-.vuelos{
-    position: relative; /* Permite que el pseudo-elemento se posicione en relación a este contenedor */
-    background: rgba(255, 255, 255, 0.9); /* Fondo blanco con opacidad */
-    padding: 2rem;
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.busca {
+    max-width: 800px;
+    margin: auto;
+    background: #fff;
+    padding: 20px;
     border-radius: 8px;
-    box-shadow: 20px 25px 20px rgba(0, 0, 0, 0.721);
-    width: auto;
-    height: auto;
-    z-index: 2; /* Asegura que esté por encima de la capa de opacidad */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.busca h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px; /* Espacio debajo del h1 */
+}
 
-table {
-    width: 80%;
+.busca table {
+    width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin: 20px 0;
 }
 
-th, td {
-    padding: 10px;
+.busca th, .busca td {
+    padding: 12px;
     text-align: left;
-    border: 3px solid #000000;
+    border-bottom: 1px solid #000000;
 }
 
-th {
-    background-color: #007bff;
+.busca th {
+    background-color: #2377ed;
     color: white;
 }
 
-tr:hover {
+.busca tr:hover {
     background-color: #f1f1f1;
 }
 
-a {
+.busca input[type="submit"] {
+    background-color: #1014d8;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.busca input[type="submit"]:hover {
+    background-color: #1277f1;
+}
+
+.busca a {
     display: block;
     text-align: center;
     margin-top: 20px;
-    color: #007bff;
     text-decoration: none;
+    color: #000000;
 }
 
-a:hover {
+.busca a:hover {
     text-decoration: underline;
 }

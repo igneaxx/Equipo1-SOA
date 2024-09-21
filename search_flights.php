@@ -37,7 +37,7 @@ $conn->close();
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="vuelos">
+    <div class="busca">
     <h1>Resultados de Vuelos</h1>
 
     <?php if (!empty($flights)): ?>
