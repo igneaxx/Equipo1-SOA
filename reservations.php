@@ -34,7 +34,6 @@ $conn->close();
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="reserv">
-
 <div class="container" >
     <h1>Mis Reservas</h1>
 

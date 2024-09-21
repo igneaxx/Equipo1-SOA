@@ -35,6 +35,7 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resultados de Vuelos</title>
     <link rel="stylesheet" href="search.css">
+    <link rel="icon" href="imagenes/airplane.png">
 </head>
 <body>
     <div class="busca">
