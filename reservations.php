@@ -34,6 +34,8 @@ $conn->close();
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+<div class="form-container" >
     <h1>Mis Reservas</h1>
 
     <!-- Botón para crear una nueva reserva -->
@@ -64,5 +66,6 @@ $conn->close();
     <?php else: ?>
         <p>No tienes reservas.</p>
     <?php endif; ?>
+    </div>
 </body>
 </html>
