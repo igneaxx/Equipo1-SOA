@@ -75,13 +75,13 @@ input[type="submit"]:hover {
 
 /* Estilo Para pagina Search.HTML */
 .search { 
-    background: url('imagenes/search.jpg') no-repeat center center fixed;
+    background: url('/imagenes/search.jpg') no-repeat center center fixed;
     background-size: cover;
 }
 
 /* Estilo Para pagina reservation.HTML */
 .reserv {
-    background: url('imagenes/reservation.jpg') no-repeat center center fixed;
+    background: url('/imagenes/reservation.jpg') no-repeat center center fixed;
     background-size: cover;
 }
 
