@@ -75,12 +75,28 @@ input[type="submit"]:hover {
 
 /* Estilo Para pagina Search.HTML */
 .search { 
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    position: relative; /* Permite posicionar elementos hijos */
     background: url('imagenes/search.jpg') no-repeat center center fixed;
     background-size: cover;
 }
 
 /* Estilo Para pagina reservation.HTML */
 .reserv {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    position: relative; /* Permite posicionar elementos hijos */
     background: url('imagenes/reserva.jpg') no-repeat center center fixed;
     background-size: cover;
 }
