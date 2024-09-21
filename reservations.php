@@ -1,10 +1,16 @@
 <?php
+session_start(); // Iniciar la sesión
+
+// Verificar si el usuario ha iniciado sesión
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.html");
+    exit();
+}
+
 $servername = "localhost";
 $username = "root";
 $password = "Aylin2024!";
 $dbname = "flight_reservation";
-
-session_start(); // Esto debe estar al inicio de cada archivo que use la sesión
 
 // Crear conexión
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -14,15 +20,18 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$user_id = $_GET['user_id'];
+$user_id = $_SESSION['user_id']; // Obtener el user_id desde la sesión
 
 // Obtener las reservas del usuario
 $sql = "SELECT r.reservation_id, f.origin, f.destination, f.departure_date, f.return_date, f.price 
         FROM Reservations r
         JOIN Flights f ON r.flight_id = f.flight_id
-        WHERE r.user_id = '$user_id'";
+        WHERE r.user_id = ?";
 
-$result = $conn->query($sql);
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $user_id); // Usar un parámetro preparado para prevenir inyección SQL
+$stmt->execute();
+$result = $stmt->get_result();
 
 $conn->close();
 ?>
@@ -36,12 +45,11 @@ $conn->close();
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="reserv">
-<div class="container" >
+<div class="container">
     <h1>Mis Reservas</h1>
 
     <!-- Botón para crear una nueva reserva -->
-<a href="search.html" class="button">Crear Nueva Reserva</a>
-
+    <a href="search.html" class="button">Crear Nueva Reserva</a>
 
     <?php if ($result->num_rows > 0): ?>
         <table>
@@ -67,6 +75,6 @@ $conn->close();
     <?php else: ?>
         <p>No tienes reservas.</p>
     <?php endif; ?>
-    </div>
+</div>
 </body>
 </html>
