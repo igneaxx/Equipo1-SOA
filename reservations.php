@@ -4,11 +4,6 @@ $username = "root";
 $password = "Aylin2024!";
 $dbname = "flight_reservation";
 
-if (!isset($_SESSION['user_id'])) {
-    // Si no hay una sesión activa, redirigir al login
-    header("Location: login.html");
-    exit();
-}
 
 // Crear conexión
 $conn = new mysqli($servername, $username, $password, $dbname);
