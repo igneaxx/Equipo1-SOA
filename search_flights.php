@@ -37,6 +37,7 @@ $conn->close();
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="container">
     <h1>Resultados de Vuelos</h1>
 
     <?php if (!empty($flights)): ?>
@@ -72,5 +73,6 @@ $conn->close();
     <?php endif; ?>
 
     <a href="search.html">Buscar Nuevos Vuelos</a>
+    </div>
 </body>
 </html>
