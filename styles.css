@@ -106,29 +106,29 @@ input[type="submit"]:hover {
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 20px 25px 20px rgba(0, 0, 0, 0.721);
-    width: 800px;
-    height: 600px;
+    width: auto;
+    height: auto;
     z-index: 2; /* Asegura que esté por encima de la capa de opacidad */
 }
 
 
-.vuelo > table {
-    width: 100%;
+table {
+    width: 80%;
     border-collapse: collapse;
     margin-top: 20px;
 }
 
-.vuelo > th, td {
+th, td {
     padding: 10px;
     text-align: left;
     border: 3px solid #000000;
 }
 
-.vuelo >  th {
+th {
     background-color: #007bff;
     color: white;
 }
 
-.vuelo >  tr:hover {
+tr:hover {
     background-color: #f1f1f1;
 }
