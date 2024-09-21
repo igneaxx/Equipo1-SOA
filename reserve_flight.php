@@ -9,7 +9,6 @@ $dbname = "flight_reservation";
 
 session_start(); // Esto debe estar al inicio de cada archivo que use la sesión
 
-
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
