@@ -28,14 +28,8 @@ if (isset($_POST['action']) && $_POST['action'] == 'login') {
                 // Almacenar el user_id en la sesión
                 $_SESSION['user_id'] = $row['user_id'];
                 
-                // Verificar si el user_id se guardó correctamente
-                echo "<pre>";
-                var_dump($_SESSION); // Mostrar contenido de la sesión
-                echo "</pre>";
-                
-                // Para depuración, quita temporalmente la redirección
-                // header("Location: reservations.php");
-                // exit();
+                header("Location: reservations.php");
+                exit();
             } else {
                 echo "Credenciales inválidas.";
             }
