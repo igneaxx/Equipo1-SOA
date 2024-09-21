@@ -73,17 +73,7 @@ $conn->close();
             <p>No se encontraron vuelos.</p>
         <?php endif; ?>
 
-        <!-- Formulario de Reserva -->
-        <h2>Reservar un Vuelo</h2>
-        <form action="reserve_flight.php" method="POST">
-            <label for="flight_id">ID de Vuelo:</label>
-            <input type="text" name="flight_id" id="flight_id" required>
-            <input type="submit" value="Confirmar Reserva">
-        </form>
-
         <a href="search.html">Buscar Nuevos Vuelos</a>
     </div>
 </body>
 </html>
-
-
