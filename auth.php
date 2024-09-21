@@ -1,7 +1,6 @@
 
 <?php
-var_dump($_POST);
-exit();
+
 
 
 ini_set('display_errors', 1);
