@@ -1,11 +1,12 @@
-
 <?php
-session_start();
+session_start(); // Inicia la sesión
+
 $servername = "localhost";
 $username = "root";
 $password = "Aylin2024!";
 $dbname = "flight_reservation";
 
+// Conexión a la base de datos
 $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Error de conexión: " . $conn->connect_error);
@@ -24,21 +25,29 @@ if (isset($_POST['action']) && $_POST['action'] == 'login') {
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
             if (password_verify($pass, $row['password'])) {
-                $_SESSION['user_id'] = $row['user_id']; // Almacena el user_id en la sesión
-                var_dump($_SESSION); // Verifica que user_id se haya almacenado
-                header("Location: reservations.php");
-                exit();
+                // Almacenar el user_id en la sesión
+                $_SESSION['user_id'] = $row['user_id'];
+                
+                // Verificar si el user_id se guardó correctamente
+                echo "<pre>";
+                var_dump($_SESSION); // Mostrar contenido de la sesión
+                echo "</pre>";
+                
+                // Para depuración, quita temporalmente la redirección
+                // header("Location: reservations.php");
+                // exit();
             } else {
-                echo "Invalid credentials";
+                echo "Credenciales inválidas.";
             }
         } else {
-            echo "No such user";
+            echo "Usuario no encontrado.";
         }
     } else {
         echo "Error en la consulta.";
     }
 }
 
+// Cerrar conexiones y declaración
 $stmt->close();
 $conn->close();
 ?>
