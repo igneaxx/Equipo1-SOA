@@ -9,52 +9,57 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Verificar conexión
 if ($conn->connect_error) {
-    die("Error de conexión: " . $conn->connect_error);
+    die("Connection failed: " . $conn->connect_error);
 }
 
 // Registro de usuario
-if (isset($_POST['action']) && $_POST['action'] == 'register') {
-    $user = $conn->real_escape_string($_POST['username']);
-    $pass = password_hash($_POST['password'], PASSWORD_BCRYPT);
-    $email = $conn->real_escape_string($_POST['email']);
-    
+if ($_POST['action'] == 'register') {
+    $user = trim($_POST['username']);
+    $pass = password_hash(trim($_POST['password']), PASSWORD_BCRYPT);
+    $email = trim($_POST['email']);
+
+    if (empty($user) || empty($pass) || empty($email)) {
+        echo "All fields are required.";
+        exit();
+    }
+
+    // Usar sentencia preparada para prevenir inyecciones SQL
     $stmt = $conn->prepare("INSERT INTO Users (username, password, email) VALUES (?, ?, ?)");
     $stmt->bind_param("sss", $user, $pass, $email);
-    
-    if ($stmt->execute()) {
-        // Registro exitoso
+
+    if ($stmt->execute() === TRUE) {
         header("Location: login.html");
         exit(); 
     } else {
-        echo "Error: " . $stmt->error;
+        echo "Error al registrar el usuario.";
     }
-    $stmt->close();
 }
 
 // Inicio de sesión
-if (isset($_POST['action']) && $_POST['action'] == 'login') {
-    $user = $conn->real_escape_string($_POST['username']);
-    $pass = $_POST['password'];
-    
+if ($_POST['action'] == 'login') {
+    $user = trim($_POST['username']);
+    $pass = trim($_POST['password']);
+
+    // Usar sentencia preparada para prevenir inyecciones SQL
     $stmt = $conn->prepare("SELECT password FROM Users WHERE username=?");
     $stmt->bind_param("s", $user);
-    $stmt->execute();
-    $stmt->store_result();
     
-    if ($stmt->num_rows > 0) {
-        $stmt->bind_result($hashedPassword);
-        $stmt->fetch();
-        
-        if (password_verify($pass, $hashedPassword)) {
-            header("Location: reservations.php");
-            exit();
+    if ($stmt->execute()) {
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            if (password_verify($pass, $row['password'])) {
+                header("Location: reservations.php");
+                exit();
+            } else {
+                echo "Invalid credentials";
+            }
         } else {
-            echo "Credenciales inválidas";
+            echo "No such user";
         }
     } else {
-        echo "No existe este usuario";
+        echo "Error en la consulta.";
     }
-    $stmt->close();
 }
 
 $conn->close();
