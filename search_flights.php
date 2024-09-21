@@ -36,62 +36,54 @@ $conn->close();
     <title>Resultados de Vuelos</title>
     <link rel="stylesheet" href="search.css">
     <link rel="icon" href="imagenes/airplane.png">
-    <link rel="stylesheet" href="scripts.js">
 </head>
 <body>
     <div class="busca">
-    <h1>Resultados de Vuelos</h1>
+        <h1>Resultados de Vuelos</h1>
 
-    <?php if (!empty($flights)): ?>
-        <table>
-            <tr>
-                <th>ID de Vuelo</th>
-                <th>Origen</th>
-                <th>Destino</th>
-                <th>Fecha de Salida</th>
-                <th>Fecha de Regreso</th>
-                <th>Precio</th>
-                <th>Acciones</th>
-            </tr>
-            <?php foreach ($flights as $flight): ?>
+        <?php if (!empty($flights)): ?>
+            <table>
                 <tr>
-                    <td><?php echo $flight['flight_id']; ?></td>
-                    <td><?php echo $flight['origin']; ?></td>
-                    <td><?php echo $flight['destination']; ?></td>
-                    <td><?php echo $flight['departure_date']; ?></td>
-                    <td><?php echo $flight['return_date'] ? $flight['return_date'] : 'N/A'; ?></td>
-                    <td><?php echo $flight['price']; ?></td>
-                    <td>
-                        <form action="reserve_flight.php" method="POST">
-                        <input type="button" value="Reservar" onclick="openModal(<?php echo $flight['flight_id']; ?>)">
-                        </form>
-                    </td>
+                    <th>ID de Vuelo</th>
+                    <th>Origen</th>
+                    <th>Destino</th>
+                    <th>Fecha de Salida</th>
+                    <th>Fecha de Regreso</th>
+                    <th>Precio</th>
+                    <th>Acciones</th>
                 </tr>
-            <?php endforeach; ?>
-        </table>
-    <?php else: ?>
-        <p>No se encontraron vuelos.</p>
-    <?php endif; ?>
+                <?php foreach ($flights as $flight): ?>
+                    <tr>
+                        <td><?php echo $flight['flight_id']; ?></td>
+                        <td><?php echo $flight['origin']; ?></td>
+                        <td><?php echo $flight['destination']; ?></td>
+                        <td><?php echo $flight['departure_date']; ?></td>
+                        <td><?php echo $flight['return_date'] ? $flight['return_date'] : 'N/A'; ?></td>
+                        <td><?php echo $flight['price']; ?></td>
+                        <td>
+                            <form action="reserve_flight.php" method="POST">
+                                <input type="hidden" name="flight_id" value="<?php echo $flight['flight_id']; ?>">
+                                <input type="submit" value="Reservar">
+                            </form>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </table>
+        <?php else: ?>
+            <p>No se encontraron vuelos.</p>
+        <?php endif; ?>
 
-    <a href="search.html">Buscar Nuevos Vuelos</a>
-    </div>
-
-    <!-- Ventana emergente para inicio de sesión -->
-<div id="loginModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <h2>Iniciar Sesión</h2>
-        <form id="loginForm" action="reserve_flight.php" method="POST">
-            <input type="hidden" name="flight_id" id="modalFlightId">
-            <label for="username">Usuario:</label>
-            <input type="text" name="username" required>
-            <label for="password">Contraseña:</label>
-            <input type="password" name="password" required>
-            <input type="submit" value="Reservar">
+        <!-- Formulario de Reserva -->
+        <h2>Reservar un Vuelo</h2>
+        <form action="reserve_flight.php" method="POST">
+            <label for="flight_id">ID de Vuelo:</label>
+            <input type="text" name="flight_id" id="flight_id" required>
+            <input type="submit" value="Confirmar Reserva">
         </form>
+
+        <a href="search.html">Buscar Nuevos Vuelos</a>
     </div>
-</div>
-
-
 </body>
 </html>
+
+
