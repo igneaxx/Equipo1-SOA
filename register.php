@@ -11,38 +11,23 @@ if ($conn->connect_error) {
     die("Error de conexión: " . $conn->connect_error);
 }
 
-// Registro de usuario
-if (isset($_POST['action']) && $_POST['action'] == 'register') {
-    // ... tu código de registro ...
-}
-
-// Inicio de sesión
-if (isset($_POST['action']) && $_POST['action'] == 'login') {
+if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email'])) {
     $user = trim($_POST['username']);
-    $pass = trim($_POST['password']);
+    $pass = password_hash(trim($_POST['password']), PASSWORD_BCRYPT);
+    $email = trim($_POST['email']);
 
-    // Usar sentencia preparada para prevenir inyecciones SQL
-    $stmt = $conn->prepare("SELECT user_id, password FROM Users WHERE username=?");
-    $stmt->bind_param("s", $user);
-    
+    $stmt = $conn->prepare("INSERT INTO Users (username, password, email) VALUES (?, ?, ?)");
+    $stmt->bind_param("sss", $user, $pass, $email);
+
     if ($stmt->execute()) {
-        $result = $stmt->get_result();
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-            if (password_verify($pass, $row['password'])) {
-                $_SESSION['user_id'] = $row['user_id']; // Guardar user_id en la sesión
-                header("Location: reservations.php");
-                exit();
-            } else {
-                echo "Invalid credentials";
-            }
-        } else {
-            echo "No such user";
-        }
+        header("Location: login.html");
+        exit(); 
     } else {
-        echo "Error en la consulta.";
+        echo "Error al registrar el usuario.";
     }
 }
 $stmt->close();
 $conn->close();
+?>
+
 ?>
