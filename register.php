@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "Aylin2024!";
 $dbname = "flight_reservation";
 
 
