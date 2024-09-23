@@ -4,7 +4,6 @@ $username = "root";
 $password = "";
 $dbname = "flight_reservation";
 
-session_start(); // Asegúrate de iniciar la sesión
 
 // Crear conexión
 $conn = new mysqli($servername, $username, $password, $dbname);
