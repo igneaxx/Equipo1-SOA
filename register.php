@@ -30,5 +30,15 @@ if (isset($_POST['action']) && $_POST['action'] == 'register') {
     $stmt = $conn->prepare("INSERT INTO Users (username, password, email) VALUES (?, ?, ?)");
     $stmt->bind_param("sss", $user, $hashed_pass, $email);
 
-    if ($stmt->execute(
+    if ($stmt->execute()) {
+        header("Location: login.html");
+        exit(); 
+    } else {
+        echo "Error al registrar el usuario: " . $stmt->error;
+    }
+
+    $stmt->close();
+}
+
+$conn->close();
 ?>
