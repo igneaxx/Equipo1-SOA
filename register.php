@@ -40,7 +40,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'register') {
 
     if ($stmt->execute()) {
         // Registro exitoso, redirigir a login
-        header("Location: login.html");
+        header("Location: search.html");
         exit();
     } else {
         // Mostrar error en caso de fallo de ejecución
