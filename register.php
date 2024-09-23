@@ -4,6 +4,8 @@ $username = "root";
 $password = "";
 $dbname = "flight_reservation";
 
+session_start(); // Asegúrate de iniciar la sesión
+
 // Crear conexión
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -27,21 +29,24 @@ if (isset($_POST['action']) && $_POST['action'] == 'register') {
 
     // Preparar y ejecutar la consulta
     $stmt = $conn->prepare("INSERT INTO Users (username, password, email) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $user, $pass, $email);
-
-    if ($stmt->execute()) {
-        // Registro exitoso, redirigir a login
-        header("Location: login.html");
-        exit(); 
+    
+    // Verificar si la preparación de la sentencia fue exitosa
+    if ($stmt) {
+        $stmt->bind_param("sss", $user, $pass, $email);
+        
+        if ($stmt->execute()) {
+            // Registro exitoso, redirigir a login
+            header("Location: login.html");
+            exit();
+        } else {
+            // Mostrar error en caso de fallo de ejecución
+            echo "Error al registrar el usuario: " . $stmt->error;
+        }
+        $stmt->close(); // Cerrar la sentencia si se creó correctamente
     } else {
-        // Mostrar error en caso de fallo
-        echo "Error al registrar el usuario: " . $stmt->error;
+        echo "Error al preparar la consulta: " . $conn->error;
     }
-
-    $stmt->close();
-} else {
-    echo "Acción no válida.";
 }
 
-$conn->close();
+$conn->close(); // Cerrar la conexión
 ?>
