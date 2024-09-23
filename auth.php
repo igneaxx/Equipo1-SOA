@@ -1,47 +1,36 @@
 <?php
-session_start(); // Inicia la sesión
-
 $servername = "localhost";
 $username = "root";
-$password = "Aylin2024!";
+$password = "";
 $dbname = "flight_reservation";
 
-// Conexión a la base de datos
+// Crear conexión
 $conn = new mysqli($servername, $username, $password, $dbname);
+
+// Verificar conexión
 if ($conn->connect_error) {
     die("Error de conexión: " . $conn->connect_error);
 }
 
-if (isset($_POST['action']) && $_POST['action'] == 'login') {
-    $user = trim($_POST['username']);
-    $pass = trim($_POST['password']);
-
-    // Usar sentencia preparada para prevenir inyecciones SQL
-    $stmt = $conn->prepare("SELECT user_id, password FROM Users WHERE username=?");
-    $stmt->bind_param("s", $user);
+// Registro de usuario
+if (isset($_POST['action']) && $_POST['action'] == 'register') {
+    $user = $conn->real_escape_string($_POST['username']);
+    $pass = password_hash($_POST['password'], PASSWORD_BCRYPT);
+    $email = $conn->real_escape_string($_POST['email']);
+    
+    $stmt = $conn->prepare("INSERT INTO Users (username, password, email) VALUES (?, ?, ?)");
+    $stmt->bind_param("sss", $user, $pass, $email);
     
     if ($stmt->execute()) {
-        $result = $stmt->get_result();
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-            if (password_verify($pass, $row['password'])) {
-                // Almacenar el user_id en la sesión
-                $_SESSION['user_id'] = $row['user_id'];
-                
-                header("Location: reservations.php");
-                exit();
-            } else {
-                echo "Credenciales inválidas.";
-            }
-        } else {
-            echo "Usuario no encontrado.";
-        }
+        // Registro exitoso
+        header("Location: login.html");
+        exit(); 
     } else {
-        echo "Error en la consulta.";
+        echo "Error: " . $stmt->error;
     }
+    $stmt->close();
 }
 
-// Cerrar conexiones y declaración
-$stmt->close();
+
 $conn->close();
 ?>
