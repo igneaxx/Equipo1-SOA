@@ -11,23 +11,32 @@ if ($conn->connect_error) {
     die("Error de conexión: " . $conn->connect_error);
 }
 
-if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email'])) {
+// Verificar conexión
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Registro de usuario
+if (isset($_POST['action']) && $_POST['action'] == 'register') {
     $user = trim($_POST['username']);
     $pass = password_hash(trim($_POST['password']), PASSWORD_BCRYPT);
     $email = trim($_POST['email']);
 
+    if (empty($user) || empty($pass) || empty($email)) {
+        echo "All fields are required.";
+        exit();
+    }
+
+    // Usar sentencia preparada para prevenir inyecciones SQL
     $stmt = $conn->prepare("INSERT INTO Users (username, password, email) VALUES (?, ?, ?)");
     $stmt->bind_param("sss", $user, $pass, $email);
 
-    if ($stmt->execute()) {
+    if ($stmt->execute() === TRUE) {
         header("Location: login.html");
         exit(); 
     } else {
         echo "Error al registrar el usuario.";
     }
 }
-$stmt->close();
-$conn->close();
-?>
 
 ?>
