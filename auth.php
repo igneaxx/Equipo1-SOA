@@ -43,6 +43,5 @@ if (isset($_POST['action']) && $_POST['action'] == 'login') {
     $stmt->close();
 }
 
-// Cerrar conexiones y declaración
 $conn->close();
 ?>
