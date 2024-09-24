@@ -39,9 +39,10 @@ if (isset($_POST['action']) && $_POST['action'] == 'login') {
     } else {
         echo "Error en la consulta.";
     }
+
+    $stmt->close();
 }
 
 // Cerrar conexiones y declaración
-$stmt->close();
 $conn->close();
 ?>
