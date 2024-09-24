@@ -33,11 +33,11 @@ if (isset($_POST['action']) && $_POST['action'] == 'register') {
 
     if ($stmt->execute()) {
         echo "Usuario registrado con éxito."; 
-        header("Location: search.html");
-        exit();
+        header("Location: login.html");
+        exit();  // Asegúrate de que haya un exit aquí
     } else {
-     
         echo "Error al registrar el usuario: " . $stmt->error;
+        exit();  // Asegúrate de que haya un exit aquí también
     }
 
     $stmt->close(); 
