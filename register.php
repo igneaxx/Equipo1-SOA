@@ -33,7 +33,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'register') {
 
     // Agregar eco para verificar datos enviados
     echo "Datos enviados: Username: $user, Email: $email<br>"; // Agrega esta línea
-
+/*
     // Ejecutar la consulta e verificar el resultado
     if ($stmt->execute()) {
         echo "Usuario registrado con éxito.";
@@ -43,7 +43,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'register') {
     } else {
         // Mostrar el error en caso de fallo
         echo "Error al registrar el usuario: " . $stmt->error;
-    }
+    } */
 
     // Cerrar la declaración
     $stmt->close(); 
