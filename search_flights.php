@@ -4,19 +4,17 @@ $username = "root";
 $password = "Aylin2024!";
 $dbname = "flight_reservation";
 
-// Crear conexión
+
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Verificar conexión
+
 if ($conn->connect_error) {
     die("Error de conexión: " . $conn->connect_error);
 }
 
-// Obtener los valores del formulario de búsqueda
 $origin = $_POST['origin'];
 $destination = $_POST['destination'];
 
-// Consulta SQL para obtener los vuelos disponibles
 $sql = "SELECT * FROM Flights WHERE origin=? AND destination=?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("ss", $origin, $destination);
