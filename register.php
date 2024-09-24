@@ -31,13 +31,20 @@ if (isset($_POST['action']) && $_POST['action'] == 'register') {
 
     $stmt->bind_param("sss", $user, $pass, $email);
 
+    // Intentar ejecutar la consulta
     if ($stmt->execute()) {
-        echo "Usuario registrado con éxito."; 
-        header("Location: login.html");
-        exit(); 
+        // Aquí deberías verificar que se inserte realmente el usuario
+        if ($stmt->affected_rows > 0) {
+            echo "Usuario registrado con éxito."; 
+            header("Location: login.html");
+            exit(); // Detener ejecución aquí
+        } else {
+            echo "Error: No se insertaron filas en la base de datos.";
+            exit();
+        }
     } else {
         echo "Error al registrar el usuario: " . $stmt->error;
-        exit();  // Asegúrate de que haya un exit aquí también
+        exit(); // Detener ejecución aquí
     }
 
     $stmt->close(); 
