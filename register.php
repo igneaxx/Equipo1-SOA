@@ -1,5 +1,4 @@
 <?php
-
 $servername = "localhost";
 $username = "root";
 $password = "Aylin2024!";
@@ -31,19 +30,15 @@ if (isset($_POST['action']) && $_POST['action'] == 'register') {
 
     $stmt->bind_param("sss", $user, $pass, $email);
 
-    // Agregar eco para verificar datos enviados
-    echo "Datos enviados: Username: $user, Email: $email<br>"; // Agrega esta línea
-/*
     // Ejecutar la consulta e verificar el resultado
     if ($stmt->execute()) {
-        echo "Usuario registrado con éxito.";
         // Solo redirigir si la inserción fue exitosa
-        header("Location: search.html");
+        header("Location: login.html");
         exit();
     } else {
         // Mostrar el error en caso de fallo
         echo "Error al registrar el usuario: " . $stmt->error;
-    } */
+    }
 
     // Cerrar la declaración
     $stmt->close(); 

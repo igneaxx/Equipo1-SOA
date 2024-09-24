@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const formData = new FormData(this);
             formData.append('action', 'register'); // Añadir acción
 
-            fetch('auth.php', {
+            fetch('register.php', { // Cambiar a register.php
                 method: 'POST',
                 body: formData
             })
@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return response.text(); // O .json() si esperas un JSON
             })
             .then(data => {
+                console.log(data); // Muestra la respuesta en la consola
                 // Manejar la respuesta del servidor
                 if (data.includes('Error:')) {
                     // Si hay un error en la respuesta, mostrarlo
@@ -35,4 +36,3 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
-
