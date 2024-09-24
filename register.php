@@ -1,5 +1,4 @@
 <?php
-session_start(); // Inicia la sesión
 
 $servername = "localhost";
 $username = "root";
@@ -32,11 +31,10 @@ if (isset($_POST['action']) && $_POST['action'] == 'register') {
 
     $stmt->bind_param("sss", $user, $pass, $email);
 
-    // Ejecutar la consulta e verificar el resultado
+    // Ejecutar la consulta y verificar el resultado
     if ($stmt->execute()) {
         echo "Usuario registrado con éxito.";
-        // Solo redirigir si la inserción fue exitosa
-        header("Location: search.html");
+        header("Location: login.html");
         exit();
     } else {
         // Mostrar el error en caso de fallo

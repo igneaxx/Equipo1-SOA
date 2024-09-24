@@ -51,6 +51,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'login') {
     } else {
         echo "Error al preparar la consulta: " . $conn->error; // Mostrar el error en la preparación
     }
+    
 }
 
 $conn->close();
