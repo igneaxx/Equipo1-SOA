@@ -46,7 +46,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'register') {
         header("Location: search.html");
         exit();
     } else {
-        // Mostrar error en caso de fallo de ejecución
+     
         echo "Error al registrar el usuario: " . $stmt->error;
     }
 
