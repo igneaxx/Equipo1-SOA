@@ -1,13 +1,13 @@
 <?php
+session_start(); // Inicia la sesión
+
 $servername = "localhost";
 $username = "root";
 $password = "Aylin2024!";
 $dbname = "flight_reservation";
 
-session_start(); 
-
+// Conexión a la base de datos
 $conn = new mysqli($servername, $username, $password, $dbname);
-
 if ($conn->connect_error) {
     die("Error de conexión: " . $conn->connect_error);
 }
@@ -23,32 +23,30 @@ if (isset($_POST['action']) && $_POST['action'] == 'register') {
     $pass = password_hash($_POST['password'], PASSWORD_BCRYPT);
     $email = $conn->real_escape_string($_POST['email']);
 
+    // Preparar la consulta
     $stmt = $conn->prepare("INSERT INTO Users (username, password, email) VALUES (?, ?, ?)");
-
+    
     if (!$stmt) {
         die("Error al preparar la consulta: " . $conn->error);
     }
 
     $stmt->bind_param("sss", $user, $pass, $email);
 
-    // Intentar ejecutar la consulta
+    // Ejecutar la consulta e verificar el resultado
     if ($stmt->execute()) {
-        // Aquí deberías verificar que se inserte realmente el usuario
-        if ($stmt->affected_rows > 0) {
-            echo "Usuario registrado con éxito."; 
-            header("Location: login.html");
-            exit(); // Detener ejecución aquí
-        } else {
-            echo "Error: No se insertaron filas en la base de datos.";
-            exit();
-        }
+        echo "Usuario registrado con éxito.";
+        // Solo redirigir si la inserción fue exitosa
+        header("Location: search.html");
+        exit();
     } else {
+        // Mostrar el error en caso de fallo
         echo "Error al registrar el usuario: " . $stmt->error;
-        exit(); // Detener ejecución aquí
     }
 
+    // Cerrar la declaración
     $stmt->close(); 
 }
 
+// Cerrar la conexión
 $conn->close(); 
 ?>
