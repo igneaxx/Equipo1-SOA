@@ -4,7 +4,7 @@ $username = "root";
 $password = "Aylin2024!";
 $dbname = "flight_reservation";
 
-session_start(); // Asegúrate de iniciar la sesión
+session_start(); // Inicia la sesión
 
 // Crear conexión
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -24,7 +24,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'register') {
 
     // Asignar y procesar los datos del formulario
     $user = $conn->real_escape_string($_POST['username']);
-    $pass = password_hash($_POST['password'], PASSWORD_BCRYPT);
+    $pass = password_hash($_POST['password'], PASSWORD_BCRYPT); // Encriptar la contraseña
     $email = $conn->real_escape_string($_POST['email']);
 
     // Preparar y ejecutar la consulta
@@ -32,15 +32,16 @@ if (isset($_POST['action']) && $_POST['action'] == 'register') {
     
     // Verificar si la preparación de la sentencia fue exitosa
     if (!$stmt) {
-        // Mostrar error de SQL si la preparación falla
         die("Error al preparar la consulta: " . $conn->error);
     }
 
     $stmt->bind_param("sss", $user, $pass, $email);
 
+    // Ejecutar la consulta y verificar si fue exitosa
     if ($stmt->execute()) {
-        // Registro exitoso, redirigir a login
-        header("Location: search.html");
+        echo "Registro exitoso.";
+        // Registro exitoso, redirigir a login o la página que desees
+        header("Location: login.html");
         exit();
     } else {
         // Mostrar error en caso de fallo de ejecución
