@@ -12,6 +12,8 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 // Verificar conexión
 if ($conn->connect_error) {
     die("Error de conexión: " . $conn->connect_error);
+} else {
+    echo "Conexión exitosa a la base de datos.<br>";
 }
 
 // Registro de usuario
@@ -21,6 +23,9 @@ if (isset($_POST['action']) && $_POST['action'] == 'register') {
         echo "Todos los campos son obligatorios.";
         exit();
     }
+
+    // Mostrar datos recibidos para depurar
+    var_dump($_POST);
 
     // Asignar y procesar los datos del formulario
     $user = $conn->real_escape_string($_POST['username']);
@@ -33,18 +38,18 @@ if (isset($_POST['action']) && $_POST['action'] == 'register') {
     // Verificar si la preparación de la sentencia fue exitosa
     if (!$stmt) {
         die("Error al preparar la consulta: " . $conn->error);
+    } else {
+        echo "Consulta preparada correctamente.<br>";
     }
 
     $stmt->bind_param("sss", $user, $pass, $email);
 
     // Ejecutar la consulta y verificar si fue exitosa
     if ($stmt->execute()) {
-        echo "Registro exitoso.";
-        // Registro exitoso, redirigir a login o la página que desees
-        header("Location: login.html");
+        echo "Registro exitoso.<br>";
+        header("Location: search.html"); // Redirigir después de un registro exitoso
         exit();
     } else {
-        // Mostrar error en caso de fallo de ejecución
         echo "Error al registrar el usuario: " . $stmt->error;
     }
 
